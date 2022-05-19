@@ -17,20 +17,20 @@ resource "digitalocean_kubernetes_cluster" "kubecon-cluster" {
   name   = "kubecon-cluster"
   # Find and change the value to an availble datacenter region close to you
   # See DO datacenter regions with the command doctl compute region list
-  region = "lon1"
-  auto_upgrade = true
+  region = "ams3"
+  auto_upgrade = false
   # Grab the latest DO Kubernetes version slug 
   # See the available versions with the command doctl kubernetes options versions
   version = "1.22.8-do.1"
-  ha = true
+  ha = false
 
   node_pool {
     name       = "kubecon-node"
     # This is a Basic AMD Droplet with 2 vCPUs and 4GB RAM
     # show droplet sizes with the command doctl compute size list
-    size       = "s-2vcpu-4gb-amd"
+    size       = "s-2vcpu-2gb-amd"
     auto_scale = true
     min_nodes  = 3
-    max_nodes  = 5
+    max_nodes  = 3
   }
 }
